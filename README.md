@@ -19,7 +19,7 @@ same firmware, and the phone gives each one its number and scan plan.
 | Board | Notes |
 |-------|-------|
 | Seeed Studio XIAO ESP32-C5 | Main Swarm node.  |
-| Espressif ESP32-C5 | For example the JCMK C5 Wardriver. Works with 4 MB and 8 MB flash. |
+| Espressif ESP32-C5 | For example the Waveshare ESP32-C5-WROOM-1. Works with 4 MB and 8 MB flash. |
 
 ## How to flash
 
