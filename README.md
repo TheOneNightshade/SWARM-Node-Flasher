@@ -101,24 +101,6 @@ The page is plain static files. Web Serial needs `https://` or `localhost`, so d
 - **On your own computer:** run `python3 -m http.server 8000` in the repo folder, then open
   http://localhost:8000.
 
-## Building the firmware
-
-The images come from the `wd_swarm_node` Arduino sketch. To build them you need:
-
-- ESP32 Arduino core **3.3.12**
-- NimBLE-Arduino **2.5.1**, with these lines turned on in its `src/nimconfig.h` (they enable the broadcast link):
-  ```
-  #define CONFIG_BT_NIMBLE_EXT_ADV 1
-  #define CONFIG_BT_NIMBLE_MAX_EXT_ADV_INSTANCES 1
-  #define CONFIG_BT_NIMBLE_MAX_EXT_ADV_DATA_LEN 251
-  ```
-
-`build-firmware.sh` compiles both boards with `arduino-cli` and copies the results into the `<board>-*.bin` files. Set
-`SKETCH=/path/to/wd_swarm_node` if the sketch isn't at `../wardrive-chain/firmware/wd_swarm_node`. It
-warns you if the build came out without the broadcast link.
-
-To release a new build, run the script, then bump `"version"` in both manifests and the build number in
-`index.html`.
 
 ## Credits
 
