@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Swarm Node Flasher</title>
+<script type="module" src="vendor/esp-web-tools/install-button.js"></script>
+<style>
+  :root {
+    --bg: #0b0a12;
+    --panel: #15131f;
+    --panel-2: #1d1a2b;
+    --border: #2c2840;
+    --text: #ecebf5;
+    --muted: #a19db8;
+    --accent: #8b5cf6;
+    --accent-2: #a78bfa;
+    --warn: #f5b84a;
+    /* esp-web-tools dialog colours */
+    --improv-primary-color: #8b5cf6;
+    --improv-text-color: #ffffff;
+    --md-sys-color-primary: #8b5cf6;
+    --md-sys-color-on-primary: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: radial-gradient(ellipse at top, #1b1530 0%, var(--bg) 60%) fixed, var(--bg);
+    color: var(--text);
+    font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 760px; margin: 0 auto; padding: 32px 16px 64px; }
+  .logo { display: block; width: min(460px, 100%); margin: 0 auto 4px; }
+  h1 { text-align: center; font-size: 1.4rem; font-weight: 600; margin: 0 0 4px; letter-spacing: .02em; }
+  .build { text-align: center; color: var(--muted); margin: 0 0 28px; font-size: .95rem; }
+  .build b { color: var(--accent-2); font-weight: 600; }
+  h2 { font-size: 1rem; font-weight: 600; margin: 0 0 12px; color: var(--accent-2); text-transform: uppercase; letter-spacing: .08em; }
+  section { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 20px; margin-bottom: 16px; }
+  .boards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+  .board { position: relative; display: block; cursor: pointer; background: var(--panel-2); border: 2px solid var(--border); border-radius: 12px; padding: 14px 14px 12px; transition: border-color .15s; }
+  .board:hover { border-color: #463f66; }
+  .board input { position: absolute; opacity: 0; pointer-events: none; }
+  .board:has(input:checked) { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(139, 92, 246, .18); }
+  .board .name { font-weight: 600; }
+  .board .sub { color: var(--muted); font-size: .88rem; margin-top: 2px; }
+  .install { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 8px 0 4px; }
+  .btn { appearance: none; border: 0; border-radius: 999px; padding: 14px 34px; font: inherit; font-weight: 600; font-size: 1.05rem; color: #fff; background: linear-gradient(135deg, #7c3aed, #a855f7); cursor: pointer; box-shadow: 0 6px 24px rgba(139, 92, 246, .35); }
+  .btn:hover { filter: brightness(1.08); }
+  .chosen { color: var(--muted); font-size: .9rem; }
+  .notice { border-radius: 10px; padding: 12px 14px; background: #2a2012; border: 1px solid #5a4318; color: #f6dca8; font-size: .95rem; }
+  ol, ul { margin: 0; padding-left: 1.3em; }
+  li { margin: 6px 0; }
+  li::marker { color: var(--accent-2); }
+  code { background: #0f0d18; border: 1px solid var(--border); border-radius: 6px; padding: 1px 6px; font-size: .88em; }
+  pre { background: #0f0d18; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; overflow-x: auto; font-size: .85rem; margin: 8px 0 0; }
+  .muted { color: var(--muted); }
+  a { color: var(--accent-2); }
+  footer { text-align: center; color: var(--muted); font-size: .85rem; margin-top: 28px; }
+</style>
+</head>
+<body>
+<main>
+  <img class="logo" src="swarm_logo.png" alt="Swarm">
+  <h1>Node Flasher</h1>
+  <p class="build">Flashes <b>Swarm node build 14</b> · broadcast link enabled</p>
+
+  <section>
+    <h2>1 · Pick your board</h2>
+    <div class="boards">
+      <label class="board">
+        <input type="radio" name="board" value="xiao-c5" checked>
+        <div class="name">Seeed Xiao ESP32-C5</div>
+        <div class="sub">Swarm nodes, Piglet. 8 MB flash.</div>
+      </label>
+      <label class="board">
+        <input type="radio" name="board" value="c5-devkit">
+        <div class="name">ESP32-C5-DevKitC-1</div>
+        <div class="sub">JCMK C5 Wardriver and other DevKits. 4 MB layout, works on 8 MB too.</div>
+      </label>
+    </div>
+  </section>
+
+  <section>
+    <h2>2 · Install</h2>
+    <div class="install">
+      <esp-web-install-button id="installer" manifest="manifest-xiao-c5.json">
+        <button slot="activate" class="btn">Connect &amp; install</button>
+        <div slot="unsupported" class="notice">
+          This browser can't talk to USB serial devices. Open this page in <b>Chrome</b> or <b>Edge</b> on a
+          computer (Windows, Mac, Linux or ChromeOS).
+        </div>
+        <div slot="not-allowed" class="notice">
+          The flasher only works on a secure page. Open it from an <code>https://</code> address or from
+          <code>http://localhost</code>.
+        </div>
+      </esp-web-install-button>
+      <div class="chosen" id="chosen">Seeed Xiao ESP32-C5</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>How it goes</h2>
+    <ol>
+      <li>Plug the board into this computer with a USB-C <b>data</b> cable.</li>
+      <li>Click <b>Connect &amp; install</b> and pick the board's port in the popup
+        (usually "USB JTAG/serial debug unit" or a COM / <code>cu.usbmodem</code> port).</li>
+      <li>Click <b>Install</b>. On the <b>Erase device</b> screen, leave the box <b>unticked</b> to keep the
+        node's number, scan plan and stored sightings. Tick it only for a fresh start or when the board
+        ran other firmware that won't boot.</li>
+      <li>Wait for it to finish (about a minute), then choose <b>Logs &amp; Console</b> and press the
+        board's reset button. You should see:
+        <pre>link: broadcast + direct
+swarm node build 14
+swarm node ready: ..., node 0, ...</pre>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>If it won't connect</h2>
+    <ul>
+      <li><b>No port in the list:</b> try another cable (many are charge-only) or another USB port.</li>
+      <li><b>Port shows but it fails to connect:</b> put the board in download mode. Hold <b>BOOT</b>,
+        tap <b>RESET</b> (or plug it in while holding BOOT), then let go and try again. Press RESET once
+        after flashing.</li>
+      <li><b>Port is busy:</b> close the Arduino IDE Serial Monitor or any other app using the board.</li>
+      <li><b>Old firmware boot-loops after flashing:</b> flash again with <b>Erase device</b> ticked.</li>
+    </ul>
+  </section>
+
+  <footer>
+    Built with ESP32 Arduino core 3.3.12 and NimBLE-Arduino 2.5.1 (extended advertising on).<br>
+    Flashing by <a href="https://esphome.github.io/esp-web-tools/">ESP Web Tools</a>.
+  </footer>
+</main>
+<script>
+  const installer = document.getElementById("installer");
+  const chosen = document.getElementById("chosen");
+  for (const radio of document.querySelectorAll('input[name="board"]')) {
+    radio.addEventListener("change", () => {
+      installer.manifest = "manifest-" + radio.value + ".json";
+      installer.setAttribute("manifest", installer.manifest);
+      chosen.textContent = radio.closest(".board").querySelector(".name").textContent;
+    });
+  }
+</script>
+</body>
+</html>
