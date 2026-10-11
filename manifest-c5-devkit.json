@@ -7,10 +7,10 @@
     {
       "chipFamily": "ESP32-C5",
       "parts": [
-        { "path": "firmware/c5-devkit/bootloader.bin", "offset": 8192 },
-        { "path": "firmware/c5-devkit/partitions.bin", "offset": 32768 },
-        { "path": "firmware/c5-devkit/boot_app0.bin", "offset": 57344 },
-        { "path": "firmware/c5-devkit/swarm_node.bin", "offset": 65536 }
+        { "path": "c5-devkit-bootloader.bin", "offset": 8192 },
+        { "path": "c5-devkit-partitions.bin", "offset": 32768 },
+        { "path": "c5-devkit-boot_app0.bin", "offset": 57344 },
+        { "path": "c5-devkit-swarm_node.bin", "offset": 65536 }
       ]
     }
   ]

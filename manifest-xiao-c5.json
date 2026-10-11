@@ -7,10 +7,10 @@
     {
       "chipFamily": "ESP32-C5",
       "parts": [
-        { "path": "firmware/xiao-c5/bootloader.bin", "offset": 8192 },
-        { "path": "firmware/xiao-c5/partitions.bin", "offset": 32768 },
-        { "path": "firmware/xiao-c5/boot_app0.bin", "offset": 57344 },
-        { "path": "firmware/xiao-c5/swarm_node.bin", "offset": 65536 }
+        { "path": "xiao-c5-bootloader.bin", "offset": 8192 },
+        { "path": "xiao-c5-partitions.bin", "offset": 32768 },
+        { "path": "xiao-c5-boot_app0.bin", "offset": 57344 },
+        { "path": "xiao-c5-swarm_node.bin", "offset": 65536 }
       ]
     }
   ]
