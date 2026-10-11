@@ -62,7 +62,7 @@
 <main>
   <img class="logo" src="swarm_logo.png" alt="Swarm">
   <h1>Node Flasher</h1>
-  <p class="build">Flashes <b>Swarm node build 1.0</b> · broadcast link enabled</p>
+  <p class="build">Flashes <b>Swarm node build 16</b> · broadcast link enabled · Bluetooth updates</p>
 
   <section>
     <h2>1 · Pick your board</h2>
@@ -70,12 +70,12 @@
       <label class="board">
         <input type="radio" name="board" value="xiao-c5" checked>
         <div class="name">Seeed Xiao ESP32-C5</div>
-        <div class="sub">Swarm nodes. 8 MB flash.</div>
+        <div class="sub">Standard Swarm node. 8 MB flash.</div>
       </label>
       <label class="board">
         <input type="radio" name="board" value="c5-devkit">
-        <div class="name">ESP32-C5</div>
-        <div class="sub">Other DevKits. 4 MB layout, works on 8 MB too.</div>
+        <div class="name">ESP32-C5-DevKitC-1</div>
+        <div class="sub">4 MB layout, works on 8 MB too. Bluetooth updates from build 16.</div>
       </label>
     </div>
   </section>
@@ -106,12 +106,16 @@
         (usually "USB JTAG/serial debug unit" or a COM / <code>cu.usbmodem</code> port).</li>
       <li>Click <b>Install</b>. On the <b>Erase device</b> screen, leave the box <b>unticked</b> to keep the
         node's number, scan plan and stored sightings. Tick it only for a fresh start or when the board
-        ran other firmware that won't boot.</li>
+        ran other firmware that won't boot. Erasing also frees the node from its owner phone.</li>
       <li>Wait for it to finish (about a minute), then choose <b>Logs &amp; Console</b> and press the
         board's reset button. You should see:
         <pre>link: broadcast + direct
-swarm node build 14
+swarm node build 16
+firmware slot app0, Bluetooth updates possible
+no owner yet: the first Swarm app to connect becomes the owner
 swarm node ready: ..., node 0, ...</pre>
+        Then open the Swarm app near the board: it locks the node to your phone the first time they
+        connect. Other people's Swarm apps can't use it after that.
       </li>
     </ol>
   </section>
