@@ -124,5 +124,4 @@ To release a new build, run the script, then bump `"version"` in both manifests 
 
 - Flashing by [ESP Web Tools](https://github.com/esphome/esp-web-tools) (Apache-2.0, license in
   `LICENSE-esp-web-tools`).
-- Idea taken from the
-  [JCMK C5 Wardriver installer](https://justcallmekoko.github.io/C5WardriverInstaller/).
+
