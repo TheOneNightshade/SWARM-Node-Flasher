@@ -18,8 +18,8 @@ same firmware, and the phone gives each one its number and scan plan.
 
 | Board | Notes |
 |-------|-------|
-| Seeed Studio XIAO ESP32-C5 | Main Swarm node. Also works on a Piglet. |
-| Espressif ESP32-C5-DevKitC-1 | For example the JCMK C5 Wardriver. Works with 4 MB and 8 MB flash. |
+| Seeed Studio XIAO ESP32-C5 | Main Swarm node.  |
+| Espressif ESP32-C5 | For example the JCMK C5 Wardriver. Works with 4 MB and 8 MB flash. |
 
 ## How to flash
 
@@ -67,7 +67,7 @@ offline sighting queue (LittleFS) alone.
 
 - **XIAO ESP32-C5:** the board's default 8 MB layout (3 MB app, 1.5 MB storage). It's the same as an
   Arduino IDE upload with default settings, so you can switch between the two without losing data.
-- **ESP32-C5-DevKitC-1:** the "No OTA" layout (2 MB app, 2 MB storage). The firmware (about 1.47 MB)
+- **ESP32-C5:** the "No OTA" layout (2 MB app, 2 MB storage). The firmware (about 1.47 MB)
   doesn't fit the 4 MB default's 1.2 MB app slot.
 
 Flashing by hand with esptool, using the same files:
