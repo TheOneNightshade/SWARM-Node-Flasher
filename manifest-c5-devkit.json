@@ -1,6 +1,6 @@
 {
   "name": "Swarm node (ESP32-C5-DevKitC-1)",
-  "version": "build 18",
+  "version": "build 19",
   "new_install_prompt_erase": true,
   "new_install_improv_wait_time": 0,
   "builds": [

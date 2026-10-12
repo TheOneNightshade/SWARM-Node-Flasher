@@ -1,6 +1,6 @@
 {
   "name": "Swarm node (Seeed Xiao ESP32-C5)",
-  "version": "build 18",
+  "version": "build 19",
   "new_install_prompt_erase": true,
   "new_install_improv_wait_time": 0,
   "builds": [
