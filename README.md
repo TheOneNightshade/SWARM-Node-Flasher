@@ -5,7 +5,7 @@ IDE, libraries or any config edits.
 
 **▶ Open the flasher: https://YOUR-USERNAME.github.io/swarm-flasher/**
 
-Current firmware: **Swarm node build 16**, with the broadcast link on and Bluetooth updates.
+Current firmware: **Swarm node build 22**, with Bluetooth updates.
 
 ## What is Swarm?
 
@@ -36,8 +36,7 @@ can't do Web Serial.
      ran other firmware, or if it boot-loops after flashing.
 5. When it finishes, open **Logs & Console** and press the board's reset button. You should see:
    ```
-   link: broadcast + direct
-   swarm node build 16
+   swarm node build 22
    firmware slot app0, Bluetooth updates possible
    no owner yet: the first Swarm app to connect becomes the owner
    swarm node ready: ..., node 0, ...
@@ -112,7 +111,7 @@ The page is plain static files. Web Serial needs `https://` or `localhost`, so d
 The images come from the `wd_swarm_node` Arduino sketch. To build them you need:
 
 - ESP32 Arduino core **3.3.12**
-- NimBLE-Arduino **2.5.1**, with these lines turned on in its `src/nimconfig.h` (they enable the broadcast link):
+- NimBLE-Arduino **2.5.1**, with these lines turned on in its `src/nimconfig.h`:
   ```
   #define CONFIG_BT_NIMBLE_EXT_ADV 1
   #define CONFIG_BT_NIMBLE_MAX_EXT_ADV_INSTANCES 1
@@ -120,8 +119,7 @@ The images come from the `wd_swarm_node` Arduino sketch. To build them you need:
   ```
 
 `build-firmware.sh` compiles both boards with `arduino-cli` and copies the results into the `<board>-*.bin` files. Set
-`SKETCH=/path/to/wd_swarm_node` if the sketch isn't at `../wardrive-chain/firmware/wd_swarm_node`. It
-warns you if the build came out without the broadcast link.
+`SKETCH=/path/to/wd_swarm_node` if the sketch isn't at `../wardrive-chain/firmware/wd_swarm_node`.
 
 To release a new build, run the script, then bump `"version"` in both manifests and the build number in
 `index.html`.

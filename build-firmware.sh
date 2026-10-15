@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Rebuilds the flasher's firmware binaries (<board>-*.bin) from ../wardrive-chain/firmware/wd_swarm_node.
 # Needs arduino-cli with esp32:esp32@3.3.12 and NimBLE-Arduino 2.5.1 installed, and NimBLE's
-# src/nimconfig.h edited for broadcast mode:
+# src/nimconfig.h edited:
 #   #define CONFIG_BT_NIMBLE_EXT_ADV 1
 #   #define CONFIG_BT_NIMBLE_MAX_EXT_ADV_INSTANCES 1
 #   #define CONFIG_BT_NIMBLE_MAX_EXT_ADV_DATA_LEN 251
@@ -30,5 +30,5 @@ build esp32:esp32:XIAO_ESP32C5 xiao-c5
 build esp32:esp32:esp32c5:PartitionScheme=min_spiffs c5-devkit
 
 grep -q "broadcast + direct" "$HERE/xiao-c5-swarm_node.bin" \
-  && echo "broadcast mode: on" || echo "WARNING: broadcast mode is OFF (nimconfig.h edit missing)"
+  && echo "nimconfig.h edit: ok" || echo "WARNING: nimconfig.h edit missing"
 rm -rf "$OUT"
