@@ -62,7 +62,7 @@
 <main>
   <img class="logo" src="swarm_logo.png" alt="Swarm">
   <h1>Node Flasher</h1>
-  <p class="build">Flashes <b>Swarm node build 22</b> · Bluetooth updates</p>
+  <p class="build">Flashes <b>Swarm node build 23</b> · Bluetooth updates</p>
 
   <section>
     <h2>1 · Pick your board</h2>
@@ -78,6 +78,8 @@
         <div class="sub">4 MB layout, works on 8 MB too. Bluetooth updates from build 16.</div>
       </label>
     </div>
+    <p class="muted" style="margin: 12px 0 0;">Got a <b>Waveshare ESP32-C5-WiFi6-KIT</b>?
+      <a href="waveshare-c5-kit.html">Follow the step-by-step guide</a>.</p>
   </section>
 
   <section>
@@ -109,7 +111,7 @@
         ran other firmware that won't boot. Erasing also frees the node from its owner phone.</li>
       <li>Wait for it to finish (about a minute), then choose <b>Logs &amp; Console</b> and press the
         board's reset button. You should see:
-        <pre>swarm node build 22
+        <pre>swarm node build 23
 firmware slot app0, Bluetooth updates possible
 no owner yet: the first Swarm app to connect becomes the owner
 swarm node ready: ..., node 0, ...</pre>
@@ -123,9 +125,13 @@ swarm node ready: ..., node 0, ...</pre>
     <h2>If it won't connect</h2>
     <ul>
       <li><b>No port in the list:</b> try another cable (many are charge-only) or another USB port.</li>
-      <li><b>Port shows but it fails to connect:</b> put the board in download mode. Hold <b>BOOT</b>,
-        tap <b>RESET</b> (or plug it in while holding BOOT), then let go and try again. Press RESET once
-        after flashing.</li>
+      <li><b>"Failed to initialize" or it won't connect:</b> the firmware already on the board may be
+        holding its USB port. Unplug the board, hold <b>BOOT</b>, plug it back in while still holding it,
+        then let go. Click <b>Connect &amp; install</b> again and pick the port fresh from the list (it can
+        come back under a new name or COM number). Holding BOOT only while clicking Install is often not
+        enough. Unplug and replug once after flashing.</li>
+      <li><b>Still failing:</b> plug straight into the computer, not through a hub or extension, close
+        other tabs of this page, and try another USB port or cable.</li>
       <li><b>Port is busy:</b> close the Arduino IDE Serial Monitor or any other app using the board.</li>
       <li><b>Old firmware boot-loops after flashing:</b> flash again with <b>Erase device</b> ticked.</li>
     </ul>

@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Waveshare C5 Kit Guide</title>
+<script type="module" src="install-button.js"></script>
+<style>
+  :root {
+    --bg: #0b0a12;
+    --panel: #15131f;
+    --panel-2: #1d1a2b;
+    --border: #2c2840;
+    --text: #ecebf5;
+    --muted: #a19db8;
+    --accent: #8b5cf6;
+    --accent-2: #a78bfa;
+    --warn: #f5b84a;
+    /* esp-web-tools dialog colours */
+    --improv-primary-color: #8b5cf6;
+    --improv-text-color: #ffffff;
+    --md-sys-color-primary: #8b5cf6;
+    --md-sys-color-on-primary: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: radial-gradient(ellipse at top, #1b1530 0%, var(--bg) 60%) fixed, var(--bg);
+    color: var(--text);
+    font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 760px; margin: 0 auto; padding: 32px 16px 64px; }
+  .logo { display: block; width: min(460px, 100%); margin: 0 auto 4px; }
+  h1 { text-align: center; font-size: 1.4rem; font-weight: 600; margin: 0 0 4px; letter-spacing: .02em; }
+  .build { text-align: center; color: var(--muted); margin: 0 0 28px; font-size: .95rem; }
+  .build b { color: var(--accent-2); font-weight: 600; }
+  h2 { font-size: 1rem; font-weight: 600; margin: 0 0 12px; color: var(--accent-2); text-transform: uppercase; letter-spacing: .08em; }
+  section { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 20px; margin-bottom: 16px; }
+  .install { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 8px 0 4px; }
+  .btn { appearance: none; border: 0; border-radius: 999px; padding: 14px 34px; font: inherit; font-weight: 600; font-size: 1.05rem; color: #fff; background: linear-gradient(135deg, #7c3aed, #a855f7); cursor: pointer; box-shadow: 0 6px 24px rgba(139, 92, 246, .35); }
+  .btn:hover { filter: brightness(1.08); }
+  .chosen { color: var(--muted); font-size: .9rem; }
+  .notice { border-radius: 10px; padding: 12px 14px; background: #2a2012; border: 1px solid #5a4318; color: #f6dca8; font-size: .95rem; }
+  .tip { border-radius: 10px; padding: 12px 14px; background: var(--panel-2); border: 1px solid var(--border); font-size: .95rem; margin-top: 12px; }
+  ol, ul { margin: 0; padding-left: 1.3em; }
+  li { margin: 6px 0; }
+  li::marker { color: var(--accent-2); }
+  code { background: #0f0d18; border: 1px solid var(--border); border-radius: 6px; padding: 1px 6px; font-size: .88em; }
+  pre { background: #0f0d18; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; overflow-x: auto; font-size: .85rem; margin: 8px 0 0; }
+  .muted { color: var(--muted); }
+  a { color: var(--accent-2); }
+  .back { display: inline-block; margin-bottom: 16px; font-size: .95rem; }
+  footer { text-align: center; color: var(--muted); font-size: .85rem; margin-top: 28px; }
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="index.html">&larr; Back to the flasher</a>
+  <img class="logo" src="swarm_logo.png" alt="Swarm">
+  <h1>Waveshare ESP32-C5-WiFi6-KIT</h1>
+  <p class="build">Step by step · Flashes <b>Swarm node build 23</b></p>
+
+  <section>
+    <h2>1 · What you need</h2>
+    <ul>
+      <li>The Waveshare ESP32-C5-WiFi6-KIT (any flash / PSRAM version).</li>
+      <li>A USB-C <b>data</b> cable. Lots of cables only charge and won't work.</li>
+      <li><b>Chrome</b> or <b>Edge</b> on a computer (Windows, Mac, Linux or ChromeOS). Phones, Firefox and
+        Safari can't flash boards.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>2 · Install the USB driver (Windows and Mac)</h2>
+    <p>The kit uses a CH343 USB-serial chip. If your computer doesn't already know it, install Waveshare's
+      driver first, then restart the browser:</p>
+    <ul>
+      <li>Windows: <a href="https://files.waveshare.com/wiki/common/CH343SER.7z">CH343SER.7z</a></li>
+      <li>Mac: <a href="https://files.waveshare.com/wiki/common/CH34XSER_MAC.7z">CH34XSER_MAC.7z</a></li>
+      <li>Linux and ChromeOS: nothing to install.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>3 · Plug into the UART port</h2>
+    <p>The kit has <b>two</b> USB-C ports. Use the one marked <b>UART</b>, and plug it straight into the
+      computer, not through a hub.</p>
+    <div class="tip">
+      The UART port resets the board into flashing mode by itself, so you don't need to press any buttons,
+      and it's the only port that shows the node's log after flashing.
+    </div>
+  </section>
+
+  <section>
+    <h2>4 · Install</h2>
+    <div class="install">
+      <esp-web-install-button manifest="manifest-c5-devkit.json">
+        <button slot="activate" class="btn">Connect &amp; install</button>
+        <div slot="unsupported" class="notice">
+          This browser can't talk to USB serial devices. Open this page in <b>Chrome</b> or <b>Edge</b> on a
+          computer (Windows, Mac, Linux or ChromeOS).
+        </div>
+        <div slot="not-allowed" class="notice">
+          The flasher only works on a secure page. Open it from an <code>https://</code> address or from
+          <code>http://localhost</code>.
+        </div>
+      </esp-web-install-button>
+      <div class="chosen">Swarm node for ESP32-C5 DevKit-style boards (right one for this kit)</div>
+    </div>
+    <ol>
+      <li>Click <b>Connect &amp; install</b>.</li>
+      <li>In the popup pick the CH343 port. It's usually called <b>USB-Enhanced-SERIAL CH343</b>, a
+        <b>COM</b> port on Windows, or <code>cu.wchusbserial…</code> / <code>cu.usbmodem…</code> on a Mac.</li>
+      <li>Click <b>Install</b>. On the <b>Erase device</b> screen, <b>tick the box</b> the first time you put
+        Swarm on this board. Leave it unticked when you're only updating a board that already runs Swarm.</li>
+      <li>Wait. Erasing the kit's large flash and writing the firmware takes a few minutes, so let it run
+        even if the progress bar looks stuck.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>5 · Check it's running</h2>
+    <ol>
+      <li>When it says it's done, choose <b>Logs &amp; Console</b>.</li>
+      <li>Press the kit's <b>RESET</b> button. You should see:
+        <pre>swarm node build 23
+firmware slot app0, Bluetooth updates possible
+no owner yet: the first Swarm app to connect becomes the owner
+swarm node ready: ..., node 0, ...</pre>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>6 · Pair it with your phone</h2>
+    <ol>
+      <li>Open the Swarm app near the kit. It finds the node and sets it up.</li>
+      <li>The first time they connect, the node locks to your phone. Other people's Swarm apps can't use it
+        after that.</li>
+      <li>To free the node for someone else, hold the kit's <b>BOOT</b> button for 5 seconds while it's
+        running.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>If it won't flash</h2>
+    <ul>
+      <li><b>No port in the list:</b> install the driver from step 2, then try another data cable or
+        USB port.</li>
+      <li><b>"Failed to initialize" or it won't connect:</b> put the kit in flashing mode by hand. Hold
+        <b>BOOT</b>, press and let go of <b>RESET</b>, then let go of BOOT. Click
+        <b>Connect &amp; install</b> again and pick the port fresh from the list.</li>
+      <li><b>Port is busy:</b> close the Arduino IDE Serial Monitor, other tabs of this page, or any other
+        app using the board.</li>
+      <li><b>It keeps dropping off USB:</b> the kit needs a solid 5 V. Plug straight into the computer, not
+        into a hub, front-panel port or long extension.</li>
+      <li><b>Flashed, but the console stays blank:</b> you're probably on the other USB-C port. Move the cable
+        to <b>UART</b>, open the console and press RESET.</li>
+      <li><b>Boot-loops after flashing:</b> flash again with <b>Erase device</b> ticked.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <a href="index.html">Back to the flasher</a><br>
+    Flashing by <a href="https://esphome.github.io/esp-web-tools/">ESP Web Tools</a>.
+  </footer>
+</main>
+</body>
+</html>
