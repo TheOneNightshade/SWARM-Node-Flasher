@@ -5,7 +5,7 @@ IDE, libraries or any config edits.
 
 **▶ Open the flasher: https://YOUR-USERNAME.github.io/swarm-flasher/**
 
-Current firmware: **Swarm node build 23**, with Bluetooth updates.
+Current firmware: **Swarm node build 24**, with Bluetooth updates.
 
 ## What is Swarm?
 
@@ -36,7 +36,7 @@ can't do Web Serial.
      ran other firmware, or if it boot-loops after flashing.
 5. When it finishes, open **Logs & Console** and press the board's reset button. You should see:
    ```
-   swarm node build 23
+   swarm node build 24
    firmware slot app0, Bluetooth updates possible
    no owner yet: the first Swarm app to connect becomes the owner
    swarm node ready: ..., node 0, ...
