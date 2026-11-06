@@ -1,0 +1,17 @@
+{
+  "name": "Swarm Remote (ELEGOO CYD)",
+  "version": "CYD build 5",
+  "new_install_prompt_erase": true,
+  "new_install_improv_wait_time": 0,
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "parts": [
+        { "path": "cyd-bootloader.bin", "offset": 4096 },
+        { "path": "cyd-partitions.bin", "offset": 32768 },
+        { "path": "cyd-boot_app0.bin", "offset": 57344 },
+        { "path": "cyd-swarm_remote.bin", "offset": 65536 }
+      ]
+    }
+  ]
+}

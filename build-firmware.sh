@@ -5,7 +5,7 @@
 #   #define CONFIG_BT_NIMBLE_EXT_ADV 1
 #   #define CONFIG_BT_NIMBLE_MAX_EXT_ADV_INSTANCES 1
 #   #define CONFIG_BT_NIMBLE_MAX_EXT_ADV_DATA_LEN 251
-# After building, update "version" in both manifest-*.json files and the build number in index.html.
+# After building, update "version" in the manifest-*.json files and the build number in index.html.
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
 SKETCH="${SKETCH:-$HERE/../wardrive-chain/firmware/wd_swarm_node}"
@@ -28,6 +28,15 @@ build esp32:esp32:XIAO_ESP32C5 xiao-c5
 # (two 1.9 MB app slots for Bluetooth updates, 128 KB LittleFS). Works on 4 MB and 8 MB modules.
 # (Builds up to 15 used No OTA: the first flash with this layout starts the offline queue afresh.)
 build esp32:esp32:esp32c5:PartitionScheme=min_spiffs c5-devkit
+
+# ELEGOO CYD remote (classic ESP32, 4 MB): Huge APP layout. Uses the core's BLE library, so the NimBLE edit
+# doesn't matter for it. Needs LovyanGFX 1.2.x. Bootloader goes at 0x1000 on classic ESP32 (manifest-cyd.json).
+CYD="${CYD_SKETCH:-$HERE/../wardrive-chain/firmware/swarm_cyd_remote}"
+"$CLI" compile -b esp32:esp32:esp32:PartitionScheme=huge_app --output-dir "$OUT/cyd" "$CYD"
+cp "$OUT/cyd/swarm_cyd_remote.ino.bootloader.bin" "$HERE/cyd-bootloader.bin"   # 0x1000
+cp "$OUT/cyd/swarm_cyd_remote.ino.partitions.bin" "$HERE/cyd-partitions.bin"   # 0x8000
+cp "$CORE/tools/partitions/boot_app0.bin"         "$HERE/cyd-boot_app0.bin"    # 0xe000
+cp "$OUT/cyd/swarm_cyd_remote.ino.bin"            "$HERE/cyd-swarm_remote.bin" # 0x10000
 
 grep -q "broadcast + direct" "$HERE/xiao-c5-swarm_node.bin" \
   && echo "nimconfig.h edit: ok" || echo "WARNING: nimconfig.h edit missing"
