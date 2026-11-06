@@ -1,6 +1,6 @@
 {
   "name": "Swarm Remote (ELEGOO CYD)",
-  "version": "CYD build 5",
+  "version": "CYD build 6",
   "new_install_prompt_erase": true,
   "new_install_improv_wait_time": 0,
   "builds": [
